@@ -1,0 +1,261 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-9 col-md-7 col-lg-5 align-content-center col-content info-form">
+
+    <div class="message-block">
+      <div
+        *ngIf="errorMessage"
+        class="alert alert-{{errorMessage.type}}">
+        {{errorMessage.text}}
+      </div>
+    </div>
+
+    <form
+      [formGroup]="form"
+      (ngSubmit)="onSubmit(form)"
+      class="form content-block">
+
+      <div class="header">
+        <span>Напишите нам</span>
+      </div>
+
+      <div class="row form-body">
+
+        <div class="col-12 form-col">
+
+          <div class="title-block">
+            <span class="title">Ваше имя:</span>
+          </div>
+
+          <div
+            class="form-group"
+            [ngClass]="{'has-error': form.get('name').invalid && form.get('name').touched}">
+
+            <input
+              class="form-control"
+              formControlName="name"/>
+
+            <div class="help-text"
+                 *ngIf="form.get('name').invalid && form.get('name').touched">
+              <span>Имя не может быть пустым </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 form-col">
+          <div class="title-block">
+            <span class="title">Ваш Email:</span>
+          </div>
+
+          <div
+            class="form-group"
+            [ngClass]="{'has-error': form.get('email').invalid && form.get('email').touched}">
+            <input
+              class="form-control"
+              formControlName="email"/>
+
+            <div class="help-text"
+                 *ngIf="form.get('email').invalid && form.get('email').touched">
+
+              <span *ngIf="form.get('email')['errors']['required'] &&
+              form.get('email')['errors']['email'] ||
+              form.get('email')['errors']['required'];else correct">
+                Email не может быть пустым</span>
+
+              <ng-template #correct>
+              <span *ngIf="form.get('email')['errors']['email']">
+                Введите корректный email</span>
+              </ng-template>
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-12 form-col">
+          <div class="title-block">
+            <span class="title">Ваш Телефон:</span>
+          </div>
+
+          <div
+            class="form-group"
+            [ngClass]="{'has-error': form.get('phone').invalid && form.get('phone').touched}">
+
+            <input
+              id="phone"
+              class="form-control"
+              formControlName="phone"/>
+
+            <div class="help-text"
+                 *ngIf="form.get('phone').invalid && form.get('phone').touched">
+              <span *ngIf="form.get('phone')['errors']['required']">
+                Телефон не может быть пустым</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 form-col">
+          <div class="title-block">
+            <span class="title">Тема:</span>
+          </div>
+
+          <div
+            class="form-group"
+            *ngIf="themes"
+            [ngClass]="{'has-error': form.get('theme').invalid && form.get('theme').touched}">
+
+            <select class="form-control"
+                    formControlName="theme"
+            >
+              <option *ngFor="let theme of themes; let i = index">
+                {{theme.name}}
+              </option>
+            </select>
+
+          </div>
+        </div>
+
+        <div class="col-12 form-col" style="height: 65px;">
+          <div class="title-block">
+            <span class="title">Ваше сообщение:</span>
+          </div>
+
+          <div
+            class="form-group"
+            [ngClass]="{'has-error': form.get('message').invalid && form.get('message').touched}">
+
+            <textarea class="form-control text-message" formControlName="message"></textarea>
+
+            <div class="help-text"
+                 *ngIf="form.get('message').invalid && form.get('message').touched">
+                           <span *ngIf="form.get('message')['errors']['required']">
+                Сообщение не может быть пустым</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 form-col">
+          <div class="title-block">
+            <span class="title">Цифры:</span>
+          </div>
+
+          <div
+            class="form-group">
+            <input
+              class="form-control"
+              style="width: 50%;float:left">
+          </div>
+
+        </div>
+
+        <div class="col-12 form-col">
+
+          <div class="form-group">
+            <button
+              type="submit"
+              class="btn btn-lg btn-block btn-send">
+              <div style="height: 100%;position: relative;">
+                <span style="position: absolute;bottom:-20%;right:8%;">
+                  Отправить письмо</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+
+
+  <div class="col-xs-12 col-sm-9 col-md-7 col-lg-5 align-content-center col-content info-user">
+    <div class="content-block" style="height:450px;margin-top:100px">
+
+      <div class="row form-body">
+        <div class="col-12 form-col">
+
+          <div class="title-block">
+            <span class="title">Ваше имя:</span>
+          </div>
+
+          <div
+            class="form-group">
+            <div class="title-block">
+              <span *ngIf="user" class="title">{{user.name}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 form-col">
+          <div class="title-block">
+            <span class="title">Ваш Email:</span>
+          </div>
+
+          <div
+            class="form-group">
+            <div class="title-block">
+              <span *ngIf="user" class="title">{{user.email}}</span>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-12 form-col">
+          <div class="title-block">
+            <span class="title">Ваш Телефон:</span>
+          </div>
+
+          <div
+            class="form-group">
+            <div class="title-block">
+              <span *ngIf="user" class="title">{{user.phone}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 form-col">
+          <div class="title-block">
+            <span class="title">Тема:</span>
+          </div>
+
+          <div
+            class="form-group">
+            <div class="title-block">
+              <span *ngIf="message" class="title">{{message.theme.name}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 form-col" style="height: 65px;">
+          <div class="title-block">
+            <span class="title">Ваше сообщение:</span>
+          </div>
+
+          <div
+            class="form-group">
+            <div class="title-block">
+              <span *ngIf="message" class="title">{{message.content}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 form-col">
+
+          <div class="form-group">
+            <button
+              (click)="returnToForm()"
+              class="btn btn-lg btn-block btn-send"
+              style="width: 220px;">
+              <div style="height: 100%;position: relative;">
+                <span style="position: absolute;bottom:-20%;right:8%;">
+                  Написать сообщение</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

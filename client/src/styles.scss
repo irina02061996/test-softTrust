@@ -1,0 +1,32 @@
+body {
+  background-color: #f3f3f3;
+}
+
+input:hover,
+input:active,
+input:focus,
+button:focus,
+button:active,
+button:hover,
+.btn.active,
+.btn:focus {
+  box-shadow: none !important;
+  outline-offset: 0 !important;
+  outline: 0 !important;
+}
+
+.has-error {
+  color: #DD8A72;
+  font-size: 12px;
+
+  input, textarea {
+    border-color: #DD8A72;
+  }
+}
+
+.help-text {
+  margin-left: 13px;
+  margin-top: 5px;
+  height: 15px;
+}
+
